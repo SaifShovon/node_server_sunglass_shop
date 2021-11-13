@@ -126,6 +126,19 @@ async function run() {
             console.log('update', updateDoc);
             res.json(result);
         })
+        app.put('/users/admin', async (req, res) => {
+            const user = req.body;
+            const filter = { email: user.email }
+            const updateDoc = {
+                $set: {
+                    role: 'admin'
+                }
+            }
+            const result = await userCollection.updateOne(filter, updateDoc, options)
+
+            console.log('update', updateDoc);
+            res.json(result);
+        })
 
         //delete api
         app.delete('/orders/:id', async (req, res) => {
