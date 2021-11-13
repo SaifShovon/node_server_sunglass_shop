@@ -16,7 +16,7 @@ async function run() {
         const database = client.db("sunglass_db");
         const userCollection = database.collection("users");
         const orderCollection = database.collection("orders");
-        const productCollection = database.collection("services");
+        const productCollection = database.collection("products");
         //get api
         app.get('/users', async (req, res) => {
             const cursor = userCollection.find({});
@@ -70,11 +70,11 @@ async function run() {
             console.log('added Order', result);
             res.json(result)
         })
-        app.post('/services', async (req, res) => {
-            const newService = req.body;
-            const result = await productCollection.insertOne(newService);
-            console.log('got new Service', req.body);
-            console.log('added Service', result);
+        app.post('/products', async (req, res) => {
+            const newProduct = req.body;
+            const result = await productCollection.insertOne(newProduct);
+            console.log('got new Product', req.body);
+            console.log('added Product', result);
             res.json(result)
         })
 
