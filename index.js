@@ -30,10 +30,10 @@ async function run() {
             res.send(orders)
         })
 
-        app.get('/services', async (req, res) => {
+        app.get('/products', async (req, res) => {
             const cursor = productCollection.find({});
-            const services = await cursor.toArray();
-            res.send(services)
+            const products = await cursor.toArray();
+            res.send(products)
         })
 
         app.get('/orders/:id', async (req, res) => {
