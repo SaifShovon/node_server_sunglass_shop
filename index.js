@@ -114,6 +114,19 @@ async function run() {
             res.json(result);
         })
 
+        app.put('/users', async (req, res) => {
+            const user = req.body;
+            const filter = { email: user.email }
+            const options = { upsert: true }
+            const updateDoc = {
+                $set: user
+            }
+            const result = await userCollection.updateOne(filter, updateDoc, options)
+
+            console.log('update', updateDoc);
+            res.json(result);
+        })
+
         //delete api
         app.delete('/orders/:id', async (req, res) => {
             const id = req.params.id;
