@@ -52,6 +52,17 @@ async function run() {
             console.log('email', email)
             res.send(orders)
         })
+        app.get('/users/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { email: email };
+            const user = await userCollection.findOne(query);
+            let isAdmin = false;
+            if (user?.role === 'admin') {
+                isAdmin = true;
+            }
+            console.log('email', email)
+            res.json({ admin: isAdmin })
+        })
 
 
         //post api
@@ -135,7 +146,6 @@ async function run() {
                 }
             }
             const result = await userCollection.updateOne(filter, updateDoc, options)
-
             console.log('update', updateDoc);
             res.json(result);
         })
