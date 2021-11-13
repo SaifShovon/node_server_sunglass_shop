@@ -58,7 +58,7 @@ async function run() {
         // create a document to insert
         app.post('/users', async (req, res) => {
             const newUser = req.body;
-            const result = await userCollection.insertOne(newOrder);
+            const result = await userCollection.insertOne(newUser);
             console.log('got new User', req.body);
             console.log('added User', result);
             res.json(result)
