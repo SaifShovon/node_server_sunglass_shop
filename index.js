@@ -17,7 +17,13 @@ async function run() {
         const userCollection = database.collection("users");
         const orderCollection = database.collection("orders");
         const productCollection = database.collection("products");
+        const reviewCollection = database.collection("reviews");
         //get api
+        app.get('/reviews', async (req, res) => {
+            const cursor = reviewCollection.find({});
+            const reviews = await cursor.toArray();
+            res.send(reviews)
+        })
         app.get('/users', async (req, res) => {
             const cursor = userCollection.find({});
             const users = await cursor.toArray();
@@ -67,6 +73,12 @@ async function run() {
 
         //post api
         // create a document to insert
+        app.post('/reviews', async (req, res) => {
+            const newReview = req.body;
+            const result = await reviewCollection.insertOne(newReview);
+            console.log('added Review', result);
+            res.json(result)
+        })
         app.post('/users', async (req, res) => {
             const newUser = req.body;
             const result = await userCollection.insertOne(newUser);
